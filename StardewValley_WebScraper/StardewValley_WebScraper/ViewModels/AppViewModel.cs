@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using StardewValley_WebScraper.Controls;
 using System.Windows.Data;
+using StardewValley_WebScraper.Models;
 
 namespace StardewValley_WebScraper.ViewModels
 {

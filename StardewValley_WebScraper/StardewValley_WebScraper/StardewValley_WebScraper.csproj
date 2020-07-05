@@ -173,8 +173,8 @@
     <Compile Include="Controls\Navbar.xaml.cs">
       <DependentUpon>Navbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Page.cs" />
-    <Compile Include="Controls\Villager.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Villager.cs" />
     <Compile Include="Utilities\Enums.cs" />
     <Compile Include="Utilities\Images.cs" />
     <Compile Include="Utilities\Saving.cs" />
@@ -243,9 +243,7 @@
   <ItemGroup>
     <Resource Include="Resources\Logo_of_Stardew_Valley.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\stardew_icon.png" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using StardewValley_WebScraper.Controls;
+using StardewValley_WebScraper.Models;
 using StardewValley_WebScraper.ViewModels;
 using System.Linq;
 using System.Windows;

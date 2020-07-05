@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Media;
 using static StardewValley_WebScraper.Utilities.Enums;
 
-namespace StardewValley_WebScraper.Controls
+namespace StardewValley_WebScraper.Models
 {
     [Serializable]
     public class Villager : ObservableObject, IComparable
