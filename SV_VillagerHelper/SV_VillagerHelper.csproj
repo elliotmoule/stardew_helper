@@ -12,6 +12,7 @@
     <None Remove="Fonts\StardewValleyRegular.ttf" />
     <None Remove="Fonts\svthinhu.ttf" />
     <None Remove="Resources\Logo_of_Stardew_Valley.png" />
+    <None Remove="Resources\reload.png" />
     <None Remove="Resources\stardew_icon.png" />
   </ItemGroup>
 
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Logo_of_Stardew_Valley.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\reload.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\stardew_icon.png">

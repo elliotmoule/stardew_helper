@@ -1,11 +1,25 @@
 ﻿using SV_VillagerHelper.Models;
 using SV_VillagerHelper.Utilities;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace SV_VillagerHelper.ViewModels
 {
     public class AppViewModel : ObservableProperties
     {
+        public AppViewModel()
+        {
+            ReloadCommand = new RelayCommand<object>(async (input) =>
+            {
+                LoadingProgress = 0;
+                Villagers.Clear();
+                SelectedVillager = null;
+                _currentlySelected = string.Empty;
+                ImageHelper.ClearVillagerAvatars();
+                await LoadVillagersAsync();
+            });
+        }
+
         private int _loadingMaxValue = 100;
         public int LoadingMaxValue
         {
@@ -49,6 +63,8 @@ namespace SV_VillagerHelper.ViewModels
                 NotifyChanged(nameof(SelectedVillager));
             }
         }
+
+        public ICommand ReloadCommand { get; set; }
 
         internal async Task LoadVillagersAsync()
         {

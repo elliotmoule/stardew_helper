@@ -65,6 +65,19 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
+        <Button Grid.RowSpan="2" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" 
+                ToolTip="Reload Villager Data" MaxWidth="70" 
+                    Command="{Binding ReloadCommand}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <Image Source="pack://application:,,,/Resources/reload.png" Margin="10" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="1" Text="Reload" TextAlignment="Center"/>
+            </Grid>
+        </Button>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -103,7 +116,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="1" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="1" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>

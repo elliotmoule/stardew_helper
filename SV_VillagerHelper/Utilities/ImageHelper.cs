@@ -68,5 +68,22 @@ namespace SV_VillagerHelper.Utilities
                 throw;
             }
         }
+
+        public static void ClearVillagerAvatars()
+        {
+            if (!Directory.Exists(BASE_FILE_LOCATION))
+            {
+                return;
+            }
+
+            try
+            {
+                Directory.Delete(BASE_FILE_LOCATION, true);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
