@@ -63,7 +63,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="{Binding ProgressBarHeight}"/>
         </Grid.RowDefinitions>
         <Button Grid.RowSpan="2" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" 
                 ToolTip="Reload Villager Data" MaxWidth="70" 
@@ -108,9 +108,9 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="0.8*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -121,7 +121,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBlock Text="{Binding SelectedVillager.DisplayName}" Grid.Column="0" Grid.ColumnSpan="3" FontSize="50" Foreground="Black" TextAlignment="Center" FontFamily="/Fonts/StardewValleyRegular.ttf #Stardew Valley"/>
-            <Image Grid.Column="1" Grid.Row="1"
+            <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
                 Source="{Binding SelectedVillager.Avatar.Image}"
                 Stretch="Uniform" Margin="15"/>
             <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Fill="Silver"/>
@@ -134,27 +134,54 @@
                     <ResourceDictionary>
                         <converters:BoolToYesNoConverter x:Key="BoolToYesNo" />
                         <converters:GenderToStringConverter x:Key="GenderToString" />
+                        <converters:SeasonToForegroundColorConverter x:Key="SeasonToForegroundColor" />
+                        <converters:EmptyInputToVisibilityConverter x:Key="EmptyInputToVisibility" />
                     </ResourceDictionary>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition />
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Gender" Grid.Column="0" Grid.Row="0" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
-                <TextBlock Text="Marriage" Grid.Column="0" Grid.Row="1" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
-                <TextBlock Text="Lives In" Grid.Column="0" Grid.Row="2" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
-                <TextBlock Text="Address" Grid.Column="0" Grid.Row="3" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
 
-                <TextBlock Text="{Binding SelectedVillager.Gender, Converter={StaticResource GenderToString}}" Grid.Column="1" Grid.Row="0" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
-                <TextBlock Text="{Binding SelectedVillager.Marriage, Converter={StaticResource BoolToYesNo}}" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
-                <TextBlock Text="{Binding SelectedVillager.LivesIn}" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
-                <TextBlock Text="{Binding SelectedVillager.Address}" Grid.Column="1" Grid.Row="3" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
+                <TextBlock Text="Birthday" Grid.Column="0" Grid.Row="0" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}" Visibility="{Binding SelectedVillager.BirthdaySeason, Converter={StaticResource EmptyInputToVisibility}}"/>
+                <TextBlock Text="Lives In" Grid.Column="0" Grid.Row="1" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}" Visibility="{Binding SelectedVillager.LivesIn, Converter={StaticResource EmptyInputToVisibility}}"/>
+                <TextBlock Text="Address" Grid.Column="0" Grid.Row="2" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}" Visibility="{Binding SelectedVillager.Address, Converter={StaticResource EmptyInputToVisibility}}"/>
+                <TextBlock Text="Marriage" Grid.Column="0" Grid.Row="3" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
+                <TextBlock Text="Gender" Grid.Column="0" Grid.Row="4" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
+
+                <!--Birthday-->
+                <Grid Grid.Column="1" Visibility="{Binding SelectedVillager.BirthdaySeason, Converter={StaticResource EmptyInputToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding SelectedVillager.BirthdaySeason}" Foreground="{Binding SelectedVillager.BirthdaySeason, Converter={StaticResource SeasonToForegroundColor}}"
+                               FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Style="{StaticResource tbSVText}">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black"
+                          ShadowDepth="1"
+                          BlurRadius="2"
+                          Direction="15"
+                          Opacity="1"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Grid.Column="1" Text="{Binding SelectedVillager.Birthday, StringFormat=D2}"
+                               FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}" Margin="5,0,0,0"/>
+                </Grid>
+                <TextBlock Text="{Binding SelectedVillager.LivesIn}" Grid.Column="1"
+                           Grid.Row="1" FontSize="20" VerticalAlignment="Center"
+                           Style="{StaticResource tbSVText}" Visibility="{Binding SelectedVillager.LivesIn, Converter={StaticResource EmptyInputToVisibility}}"
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding SelectedVillager.Address}" Grid.Column="1" Grid.Row="2" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}" Visibility="{Binding SelectedVillager.Address, Converter={StaticResource EmptyInputToVisibility}}"/>
+                <TextBlock Text="{Binding SelectedVillager.Marriage, Converter={StaticResource BoolToYesNo}}" Grid.Column="1" Grid.Row="3" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
+                <TextBlock Text="{Binding SelectedVillager.Gender, Converter={StaticResource GenderToString}}" Grid.Column="1" Grid.Row="4" FontSize="20" VerticalAlignment="Center" Style="{StaticResource tbSVText}"/>
             </Grid>
 
             <ListBox Grid.Row="5" Grid.Column="1" BorderThickness="0" ItemsSource="{Binding SelectedVillager.FamilyMembers}">
@@ -185,6 +212,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <ProgressBar Grid.Row="2" Value="{Binding LoadingProgress}" Maximum="{Binding LoadingMaxValue}" Background="#00E6E6E6" Foreground="#FF03A007" BorderBrush="#FF131254"/>
+        <ProgressBar Grid.Row="2" Value="{Binding LoadingProgress}" Maximum="{Binding LoadingMaxValue}"
+                     Background="#00E6E6E6" Foreground="#FF03A007" BorderBrush="#FF131254"/>
     </Grid>
 </Window>

@@ -4,24 +4,19 @@ namespace SV_VillagerHelper.Utilities
 {
     public static partial class StringHelper
     {
-        private static readonly char[] separator = ['\n'];
-        [GeneratedRegex(@"\t|\r")]
-        private static partial Regex ReplaceTabsAndCarriageReturnPattern();
-        [GeneratedRegex(@"\n+")]
-        private static partial Regex ReplaceNewLinePattern();
-
-        public static string FormatText(string text)
-        {
-            // Remove newlines, tabs, and excess whitespace
-            text = ReplaceTabsAndCarriageReturnPattern().Replace(text, "").Trim();
-            text = ReplaceNewLinePattern().Replace(text, "\n"); // Replace multiple newlines with a single newline
-
-            // Identify the position of the first newline and extract the text after it
-            var parts = text.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-
-            return parts.Length > 1 ? parts[1].Trim() : string.Empty;
-        }
-
         public static bool ContainsAny(this string source, params string[] targets) => targets.Any(word => Regex.IsMatch(source, $@"\b{Regex.Escape(word)}\b", RegexOptions.IgnoreCase));
+
+        /// <summary>
+        /// Runs a Contains check against the <paramref name="source"/> looking for any of the given <paramref name="targets"/>.
+        /// </summary>
+        /// <param name="source">The text source to check within.</param>
+        /// <param name="targets">The target strings to use to check for a Contains match.</param>
+        /// <returns>Returns the matched string from <paramref name="targets"/>.</returns>
+        public static string GetTableRow(string source, params string[] targets)
+        {
+            var target = targets.FirstOrDefault(word => Regex.IsMatch(source, $@"\b{Regex.Escape(word)}\b", RegexOptions.IgnoreCase));
+
+            return target ?? string.Empty;
+        }
     }
 }

@@ -36,8 +36,19 @@ namespace SV_VillagerHelper.Models
             }
         }
 
-        private string _birthday = string.Empty;
-        public string Birthday
+        private string _birthdaySeason = string.Empty;
+        public string BirthdaySeason
+        {
+            get { return _birthdaySeason; }
+            set
+            {
+                _birthdaySeason = value;
+                NotifyChanged(nameof(BirthdaySeason));
+            }
+        }
+
+        private int _birthday = 0;
+        public int Birthday
         {
             get { return _birthday; }
             set

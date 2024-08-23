@@ -1,6 +1,7 @@
 ﻿using SV_VillagerHelper.Models;
 using SV_VillagerHelper.Utilities;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SV_VillagerHelper.ViewModels
@@ -28,6 +29,7 @@ namespace SV_VillagerHelper.ViewModels
             {
                 _loadingMaxValue = value;
                 NotifyChanged(nameof(LoadingMaxValue));
+                NotifyChanged(nameof(ProgressBarHeight));
             }
         }
 
@@ -39,10 +41,13 @@ namespace SV_VillagerHelper.ViewModels
             {
                 _loadingProgress = value;
                 NotifyChanged(nameof(LoadingProgress));
+                NotifyChanged(nameof(ProgressBarHeight));
             }
         }
 
-        private ObservableCollection<Villager> _villagers = new();
+        public GridLength ProgressBarHeight => new(LoadingProgress == LoadingMaxValue ? 6 : 15, GridUnitType.Pixel);
+
+        private ObservableCollection<Villager> _villagers = [];
         public ObservableCollection<Villager> Villagers
         {
             get { return _villagers; }

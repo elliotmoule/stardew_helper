@@ -5,6 +5,16 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>stardew_icon_SUI_icon.ico</ApplicationIcon>
+    <Nullable>disable</Nullable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>stardew_icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/elliotmoule/stardew_helper</PackageProjectUrl>
+    <Copyright>Elliot Moule</Copyright>
+    <RepositoryUrl>https://github.com/elliotmoule/stardew_helper</RepositoryUrl>
+    <Title>Stardew Valley Villager Helper</Title>
+    <Authors>Elliot Moule</Authors>
+    <Description>Very basic webscrapping app to show Villager Information, for NPCs from the game Stardew Valley.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +23,17 @@
     <None Remove="Fonts\svthinhu.ttf" />
     <None Remove="Resources\Logo_of_Stardew_Valley.png" />
     <None Remove="Resources\reload.png" />
-    <None Remove="Resources\stardew_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="stardew_icon_SUI_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +62,13 @@
     <Resource Include="Resources\stardew_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\stardew_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
